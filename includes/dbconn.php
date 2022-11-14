@@ -1,7 +1,8 @@
 
 <?php
-  $mysqli = mysqli_init();
-  $mysqli->ssl_set(NULL, NULL, "/etc/ssl/certs/ca-certificates.crt", NULL, NULL);
-  $mysqli->real_connect($_ENV["HOST"], $_ENV["USERNAME"], $_ENV["PASSWORD"], $_ENV["DATABASE"]);
-  $mysqli->close();
+    $dbuser="u39cwwooqzyktrnn7cwy";
+    $dbpass="pscale_pw_F3jYijuWrWxc38iGhhFIdcphgbFRiOcrz6kPRtDhWVy";
+    $host="ap-south.connect.psdb.cloud";
+    $db="hostel-room-booking";
+    $mysqli =new mysqli($host,$dbuser, $dbpass, $db);
 ?>
