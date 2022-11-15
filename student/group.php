@@ -51,53 +51,52 @@
             echo "<script>alert('Room has been alloted to the group!');</script>";
        }
 
-       if(isset($_POST['creategroup'])){
-        $aid=$_SESSION['id'];
-        $id=$_SESSION['roll'];
-        $uid=$_SESSION['login'];
+    if(isset($_POST['creategroup'])){
+    $aid=$_SESSION['id'];
+    $id=$_SESSION['roll'];
+    $uid=$_SESSION['login'];
 
 
-        $query="SELECT group_id FROM userregistration WHERE id=?";
-        $stmt100=$mysqli->prepare($query);
-        $stmt100->bind_param('i',$aid);
-        $stmt100->execute();
-        $stmt100->bind_result($g);
-        $rs100=$stmt100->fetch();
-        $stmt100->close();
+    $query="SELECT group_id FROM userregistration WHERE id=?";
+    $stmt100=$mysqli->prepare($query);
+    $stmt100->bind_param('i',$aid);
+    $stmt100->execute();
+    $stmt100->bind_result($g);
+    $rs100=$stmt100->fetch();
+    $stmt100->close();
 
 
-        if($g==0){
-            $query200="SELECT unit_no FROM userregistration WHERE id=?";
-            $stmt200=$mysqli->prepare($query200);
-            $stmt200->bind_param('i',$aid);
-            $stmt200->execute();
-            $stmt200->bind_result($u);
-            $rs200=$stmt200->fetch();
-            $stmt200->close();
-            $k=0;
+    if($g==0){
+        $query200="SELECT unit_no FROM userregistration WHERE id=?";
+        $stmt200=$mysqli->prepare($query200);
+        $stmt200->bind_param('i',$aid);
+        $stmt200->execute();
+        $stmt200->bind_result($u);
+        $rs200=$stmt200->fetch();
+        $stmt200->close();
+        $k=0;
 
-            if($u==0){
-            $k=1;
-            $query="INSERT INTO groups(group_id,roll) VALUES (?,?)";
-            $stmt=$mysqli->prepare($query);
-            $stmt->bind_param('ii',$aid,$id);
-            $stmt->execute();
+        if($u==0){
+        $k=1;
+        $query="INSERT INTO groups(group_id,roll) VALUES (?,?)";
+        $stmt=$mysqli->prepare($query);
+        $stmt->bind_param('ii',$aid,$id);
+        $stmt->execute();
 
-            $query101="UPDATE userregistration SET group_id=$aid WHERE id=$aid";
-            $stmt101=$mysqli->prepare($query101);
-            $stmt101->execute();
+        $query101="UPDATE userregistration SET group_id=$aid WHERE id=$aid";
+        $stmt101=$mysqli->prepare($query101);
+        $stmt101->execute();
 
 
-                echo "<script>alert('New Group has been created!');</script>";
-            }else{
-                echo "<script>alert('You have already booked a room! So you can't create a group!');</script>";
-            }
+            echo "<script>alert('New Group has been created!');</script>";
         }else{
-            echo "<script>alert('You are already in a group!');</script>";
+            echo "<script>alert('You have already booked a room! So you can't create a group!');</script>";
         }
+    }else{
+        echo "<script>alert('You are already in a group!');</script>";
+    }
 
-        }
-
+    }
 
     
 ?>
@@ -257,7 +256,6 @@
                                         <?php if($gcnt>4){?>
                                             <a href="#"><button type="button" class="btn btn-block btn-md">Group is Full</button></a><?php
                                         }else{?><a href="addg.php"><button type="button" class="btn btn-block btn-md btn-success">Add Member</button></a><?php }?>
-                                
                                     </div>
                                 </div>
                             </div>
